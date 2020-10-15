@@ -1,0 +1,47 @@
+﻿@model IEnumerable<CRUD.Crosscutting.DTO.ProdutoDTO>
+
+@{
+    ViewData["Title"] = "Produtos";
+}
+
+<div class="col-md-12">
+
+    <h2 class="text-center"><i class="fas fa-comments-dollar text-success"></i> Produtos </h2>
+
+    <table class="table">
+        <thead class="thead-light">
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.NomeCategoria)</th>
+                <th>@Html.DisplayNameFor(model => model.NomeProduto)</th>
+                <th>@Html.DisplayNameFor(model => model.Valor)</th>
+                <th>@Html.DisplayNameFor(model => model.DataCadastro)</th>
+                <th>@Html.DisplayNameFor(model => model.DataAlteracao)</th>
+                <th>
+                    <a onclick="showInPopup('@Url.Action("Create","Produtos",null,Context.Request.Scheme)','Novo Produto'),getListCategorias('@Url.Action("GetListCategoria","ApiCategorias",null,Context.Request.Scheme)')" class="btn btn-success text-white"><i class="fas fa-random"></i> Novo Produto</a>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.NomeCategoria)</td>
+                    <td>@Html.DisplayFor(modelItem => item.NomeProduto)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Valor)</td>
+                    <td>@Html.DisplayFor(modelItem => item.DataCadastro)</td>
+                    <td>@Html.DisplayFor(modelItem => item.DataAlteracao)</td>
+                    <td>
+                        <div>
+                            <a onclick="showInPopup('@Url.Action("Update","Produtos",new {id=item.IdProduto},Context.Request.Scheme)','Editar Produto'), getListCategorias('@Url.Action("GetListCategoria","ApiCategorias",null,Context.Request.Scheme)')" class="btn btn-info text-white"> Editar</a>
+                            <form asp-action="Delete" onsubmit="return jQueryAjaxDelete(this, @item.IdProduto)" class="d-inline">
+                                <input type="submit" value="Excluir" class="btn btn-danger" />
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<script src="~/js/produto.Controller.js" asp-append-version="true"></script>

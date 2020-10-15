@@ -1,0 +1,39 @@
+﻿@model CRUD.Crosscutting.DTO.ProdutoDTO
+
+@{ Layout = null; }
+
+<div class="row">
+    <div class="col-md-12">
+        <form onsubmit="return jQueryAjaxPut(this);">
+            <input type="hidden" asp-for="IdProduto" />
+            <div class="form-group">
+                <label asp-for="NomeCategoria" class="control-label"></label>
+                <div class="input-group">
+                    <input asp-for="NomeCategoria" class="form-control" placeholder="Digite o nome do Produto" disabled />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="NomeProduto" class="control-label"></label>
+                <div class="input-group">
+                    <input asp-for="NomeProduto" class="form-control" placeholder="Digite o nome do Produto" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Valor" class="control-label"></label>
+                <div class="input-group">
+                    <input asp-for="Valor" class="form-control" placeholder="Digite o nome do Produto" onkeyup="formatarMoeda(this);" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-6 offset-md-3">
+                    <input type="submit" value="Editar" class="btn btn-primary btn-block" />
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="~/js/produto.Controller.js" asp-append-version="true"></script>

@@ -1,0 +1,56 @@
+﻿@model IEnumerable<CRUD.Domain.Entities.Categoria>
+
+@{
+    ViewData["Title"] = "Categorias";
+}
+
+
+<div class="col-md-12">
+
+    <h2 class="text-center"> Categorias </h2>
+
+    <table class="table">
+        <thead class="thead-light">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Nome)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DataCadastro)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DataAlteracao)
+                </th>
+                <th>
+                    <a onclick="showInPopup('@Url.Action("Create","Categorias",null,Context.Request.Scheme)','Nova Categoria')" class="btn btn-success text-white"><i class="fas fa-random"></i> Nova Categoria</a>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nome)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DataCadastro)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DataAlteracao)
+                    </td>
+                    <td>
+                        <div>
+                            <a onclick="showInPopup('@Url.Action("Update","Categorias",new {id=item.IdCategoria},Context.Request.Scheme)','Update Categoria')" class="btn btn-info text-white"> Editar </a>
+                            <form asp-action="Delete" onsubmit="return jQueryAjaxDelete(this, @item.IdCategoria)" class="d-inline">
+                                <input type="submit" value="Excluir" class="btn btn-danger" />
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<script src="~/js/categoria.Controller.js" asp-append-version="true"></script>
